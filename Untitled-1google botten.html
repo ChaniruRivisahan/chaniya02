@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Webpage Title</title>
+
+    <!-- Include the Google Sign-In API script -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <!-- Style for the custom Google login button (optional) -->
+    <style>
+        #google-login-button {
+            display: inline-block;
+            background: #4285F4;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: 'Arial', sans-serif;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Container for the custom Google login button -->
+    <div id="google-login-button" onclick="startGoogleSignIn()">
+        Sign in with Google
+    </div>
+
+    <!-- Your HTML content goes here -->
+
+    <script>
+        // Initialize the Google Sign-In API
+        gapi.load('auth2', function() {
+            gapi.auth2.init({
+                client_id: 'YOUR_CLIENT_ID',
+            });
+        });
+
+        // Function to start the Google Sign-In process
+        function startGoogleSignIn() {
+            gapi.auth2.getAuthInstance().signIn().then(
+                function(googleUser) {
+                    var profile = googleUser.getBasicProfile();
+                    console.log('ID: ' + profile.getId());
+                    console.log('Name: ' + profile.getName());
+                    console.log('Email: ' + profile.getEmail());
+                    // Additional actions after sign-in
+                },
+                function(error) {
+                    console.log(error);
+                }
+            );
+        }
+    </script>
+</body>
+</html>
